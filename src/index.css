@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .water-layer {
+    @apply absolute w-[280%] h-[280%] -bottom-[265%] -left-[90%] rounded-[42%] pointer-events-none transition-colors duration-500;
+  }
+
+  /* Camada de trás (mais lenta e clara) */
+  .wave-back {
+    @apply animate-wave-slow z-0 opacity-50;
+  }
+
+  /* Camada da frente (mais rápida e escura) */
+  .wave-front {
+    @apply animate-wave-medium z-10 opacity-90;
+  }
+}
