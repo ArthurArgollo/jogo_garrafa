@@ -81,7 +81,7 @@
 .bottle-wrapper {
   position: relative;
   /* Aplica uma sombra leve drop-shadow para a forma arredondada */
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)) drop-shadow(0 0 2px var(--bottle-border-color));
 }
 
 .bottle {
@@ -92,7 +92,7 @@
   filter: url(#round-corners);
   
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  border: none;
+  border: 3px solid rgba(255,255,255,.8);
   overflow: hidden;
 }
 
@@ -103,9 +103,11 @@
   inset: 0;
   /* A borda agora é definida no polígono pelo filtro.
      O pseudo-elemento só garante o preenchimento de vidro */
-  background: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,.38), transparent 35%, rgba(255,255,255,.12));
   pointer-events: none;
-  z-index: 10;
+  z-index: 8;
+  border: 5px solid var(--bottle-border-color);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.55), inset 0 0 18px rgba(255,255,255,.28);
 }
 
 /* --- A ÁGUA --- */
@@ -180,6 +182,19 @@
 .title { font-size: 2.8rem; color: var(--text-dark); margin-bottom: 5px; font-weight: 800; text-transform: uppercase; letter-spacing: -1px;}
 .high-score-badge { background: #333; color: #f1c40f; padding: 5px 20px; border-radius: 50px; margin-bottom: 15px; font-weight: 700;}
 .stats-row { display: flex; gap: 30px; justify-content: center; color: #64748b; font-size: 1.1rem;}
+.subtitle { color: #64748b; margin: -2px 0 18px; font-size: 1rem; }
+
+.bottle-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  color: var(--text-dark);
+  text-align: center;
+}
+.bottle-info span { font-size: 1.5rem; }
+.bottle-info strong { font-size: 1.1rem; }
+.bottle-info small { color: #64748b; font-size: .85rem; }
 
 .menu-box { display: flex; flex-direction: column; gap: 12px; width: 280px; }
 .menu-btn { padding: 18px; border: none; border-radius: 12px; color: white; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 1.1rem; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
@@ -202,3 +217,53 @@
 
 .percentage { font-size: 2rem; margin-top: 10px; font-weight: 800; color: #333;}
 .back-btn { position: absolute; top: 20px; left: 20px; padding: 10px 18px; cursor: pointer; background: white; border: none; border-radius: 8px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+
+.cap {
+  position: absolute;
+  z-index: 7;
+  top: 2%;
+  left: 38%;
+  width: 24%;
+  height: 7%;
+  border-radius: 4px;
+  background: var(--cap-color, #334155);
+  box-shadow: inset 0 2px rgba(255,255,255,.35), 0 2px 3px rgba(0,0,0,.2);
+}
+
+.bottle-label {
+  position: absolute;
+  z-index: 6;
+  left: 8%;
+  right: 8%;
+  bottom: 22%;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: var(--label-color, rgba(255,255,255,.86));
+  color: var(--label-text, #1e293b);
+  font-size: clamp(9px, 2.5vw, 13px);
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 2px 5px rgba(0,0,0,.14);
+  transform: rotate(var(--label-tilt, 0deg));
+}
+.bottle-label span { display: block; font-size: 1.15em; margin-bottom: 2px; }
+
+.bottle-cola { --cap-color: #171717; --label-color: #d9232e; --label-text: #fff; }
+.bottle-orange { --cap-color: #f97316; --label-color: #ffedd5; --label-text: #9a3412; }
+.bottle-grape { --cap-color: #4c1d95; --label-color: #ede9fe; --label-text: #5b21b6; --label-tilt: -2deg; }
+.bottle-tropical { --cap-color: #f59e0b; --label-color: #fef3c7; --label-text: #92400e; }
+.bottle-lemon { --cap-color: #65a30d; --label-color: #ecfccb; --label-text: #3f6212; }
+.bottle-energy { --cap-color: #be185d; --label-color: #fce7f3; --label-text: #9d174d; }
+.bottle-water { --cap-color: #0284c7; --label-color: #e0f2fe; --label-text: #075985; }
+.bottle-detergent { --cap-color: #047857; --label-color: #d1fae5; --label-text: #065f46; }
+.bottle-cleaner { --cap-color: #4338ca; --label-color: #e0e7ff; --label-text: #3730a3; }
+.bottle-shampoo { --cap-color: #be185d; --label-color: #fce7f3; --label-text: #9d174d; }
+
+@media (max-width: 520px) {
+  .container { padding: 16px 12px; }
+  .title { font-size: 2.2rem; }
+  .stats-row { gap: 14px; font-size: .95rem; }
+  .bottle-scene { width: 100%; }
+  .bottle { max-height: 48vh; }
+}
